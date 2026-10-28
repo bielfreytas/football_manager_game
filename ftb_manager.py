@@ -10,8 +10,10 @@ class Partida:
         if jogador.time == self.casa or jogador.time == self.visitante:
             if jogador.time == self.casa:
                 print(f"Jogador escalado no time {self.casa.nome}")
+                self.jogando = True 
             else:
                 print(f"Jogador escalado em {self.visitante.nome}")
+                self.jogando = True
 
 
 class Time:
@@ -20,7 +22,10 @@ class Time:
         self.jogadores = []
         self.gols = 0
 
-
+    def adicionar_jogador(self, jogador):
+        self.jogadores.append(jogador)
+        jogador.time = self
+      
 class Jogador:
     def __init__(self, nome, idade, posicao):
         self.nome = nome
@@ -31,7 +36,7 @@ class Jogador:
         self.time = None
         self.jogando = False
 
-    def mostrar_info(self):
+    def mostrar_info(self): 
         print(f"""
     ==== INFORMAÇÕES ====
     Nome: {self.nome}
