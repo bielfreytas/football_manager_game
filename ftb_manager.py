@@ -8,26 +8,32 @@ class Partida:
 
     def escalar_jogador(self, jogador):
         if jogador.time == self.casa or jogador.time == self.visitante:
+            jogador.jogando = True
             if jogador.time == self.casa:
-                print(f"Jogador escalado no time {self.casa.nome}")
-                self.jogando = True 
+                print(f"{jogador.nome} escalado no time {self.casa.nome}")
             else:
-                print(f"Jogador escalado em {self.visitante.nome}")
-                self.jogando = True
+                print(f"{jogador.nome} escalado em {self.visitante.nome}")
+        else:
+            print("O jogador não faz parte de nenhum dos 2 times da partida!")
 
-
+    def inscrever_jogadores(self, time):
+        for i in time.jogadores:
+            self.escalar_jogador(i)
+                 
+                
 class Time:
     def __init__(self, nome):
         self.nome = nome
         self.jogadores = []
         self.gols = 0
 
-    def adicionar_jogador(self, jogador):
-        if jogador.time is None:
-            self.jogadores.append(jogador)
-            jogador.time = self
-        else:
-            print(f"Esse jogador já pertence ao {jogador.time.nome}, tente transferi-lo!")
+    def adicionar_jogadores(self, jogadores):
+        for jogador in jogadores:
+            if jogador.time is None:
+                self.jogadores.append(jogador)
+                jogador.time = self
+            else:
+                print(f"Esse jogador já pertence ao {jogador.time.nome}, tente transferi-lo!")
 
 class Jogador:
     def __init__(self, nome, idade, posicao):
@@ -73,3 +79,31 @@ class Jogador:
                     self.energia = 100
                     print("Jogador recuperado!")
                     break
+
+    def status_jogador(self):
+        if self.jogando:
+            return print("Está em jogo")
+        else:
+            return print("Não está em jogo")
+
+
+vini = Jogador("Vini Jr", 26, "ponta")
+barletta = Jogador("Barletta", 24, "ponta")
+depena = Jogador("De pena", 30, "meia")
+paqueta = Jogador("Paquetá", 28, "meia/ponta")
+
+flamengo = Time("Flamengo")
+sport = Time("Sport")
+
+flamengo.adicionar_jogadores([paqueta, vini])
+sport.adicionar_jogadores([depena, barletta])
+
+
+flamengo_sport = Partida(flamengo, sport)
+
+flamengo_sport.inscrever_jogadores(flamengo)
+flamengo_sport.inscrever_jogadores(sport)
+
+barletta.status_jogador()
+vini.status_jogador()
+
