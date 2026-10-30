@@ -85,25 +85,3 @@ class Jogador:
             return print("Está em jogo")
         else:
             return print("Não está em jogo")
-
-
-vini = Jogador("Vini Jr", 26, "ponta")
-barletta = Jogador("Barletta", 24, "ponta")
-depena = Jogador("De pena", 30, "meia")
-paqueta = Jogador("Paquetá", 28, "meia/ponta")
-
-flamengo = Time("Flamengo")
-sport = Time("Sport")
-
-flamengo.adicionar_jogadores([paqueta, vini])
-sport.adicionar_jogadores([depena, barletta])
-
-
-flamengo_sport = Partida(flamengo, sport)
-
-flamengo_sport.inscrever_jogadores(flamengo)
-flamengo_sport.inscrever_jogadores(sport)
-
-barletta.status_jogador()
-vini.status_jogador()
-
