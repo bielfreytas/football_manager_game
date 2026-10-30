@@ -23,9 +23,12 @@ class Time:
         self.gols = 0
 
     def adicionar_jogador(self, jogador):
-        self.jogadores.append(jogador)
-        jogador.time = self
-      
+        if jogador.time is None:
+            self.jogadores.append(jogador)
+            jogador.time = self
+        else:
+            print(f"Esse jogador já pertence ao {jogador.time.nome}, tente transferi-lo!")
+
 class Jogador:
     def __init__(self, nome, idade, posicao):
         self.nome = nome
